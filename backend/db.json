@@ -1,0 +1,109 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "knNumber": "KN123456",
+      "role": "User",
+      "goldDepositRequests": [
+        {
+          "id": 1,
+          "goldType": "24 Carat",
+          "weight": 100,
+          "jewelersName": "GoldMart",
+          "placeBought": "New Delhi",
+          "photoUrl": "https://example.com/gold1.jpg",
+          "amount": 50000,
+          "status": "accepted"
+        },
+        {
+          "id": 2,
+          "goldType": "22 Carat",
+          "weight": 50,
+          "jewelersName": "Shree Jewelers",
+          "placeBought": "Mumbai",
+          "photoUrl": "https://example.com/gold2.jpg",
+          "amount": 25000,
+          "status": "pending"
+        }
+      ],
+      "bankDetails": {
+        "accountHolderName": "John Doe",
+        "jointAccount": false,
+        "accountType": "Savings",
+        "accountNumber": "1234567890",
+        "ifscCode": "BANK001",
+        "bankName": "Star Finance Bank",
+        "branchName": "New Delhi Branch"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "knNumber": "KN987654",
+      "role": "User",
+      "goldDepositRequests": [
+        {
+          "id": 1,
+          "goldType": "18 Carat",
+          "weight": 75,
+          "jewelersName": "Luxury Jewels",
+          "placeBought": "Bangalore",
+          "photoUrl": "https://example.com/gold3.jpg",
+          "amount": 30000,
+          "status": "accepted"
+        }
+      ],
+      "bankDetails": {
+        "accountHolderName": "Jane Smith",
+        "jointAccount": false,
+        "accountType": "Current",
+        "accountNumber": "9876543210",
+        "ifscCode": "BANK002",
+        "bankName": "Star Finance Bank",
+        "branchName": "Bangalore Branch"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Amit Patel",
+      "knNumber": "KN564738",
+      "role": "User",
+      "goldDepositRequests": [
+        {
+          "id": 1,
+          "goldType": "24 Carat",
+          "weight": 200,
+          "jewelersName": "Raj Jewelers",
+          "placeBought": "Ahmedabad",
+          "photoUrl": "https://example.com/gold4.jpg",
+          "amount": 100000,
+          "status": "rejected"
+        }
+      ],
+      "bankDetails": {
+        "accountHolderName": "Amit Patel",
+        "jointAccount": true,
+        "accountType": "Savings",
+        "accountNumber": "5647382910",
+        "ifscCode": "BANK003",
+        "bankName": "Star Finance Bank",
+        "branchName": "Ahmedabad Branch"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Michael Scott",
+      "role": "Employee",
+      "branch": "Scranton Branch",
+      "position": "Loan Officer"
+    },
+    {
+      "id": 5,
+      "name": "Dwight Schrute",
+      "role": "Employee",
+      "branch": "Scranton Branch",
+      "position": "Assistant Manager"
+    }
+  ]
+}
