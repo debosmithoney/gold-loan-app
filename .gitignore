@@ -1,0 +1,54 @@
+# Node modules (dependencies)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Expo-related files
+.expo/
+.expo-shared/
+web-build/
+ios/
+android/
+dist/
+
+# Build files and system-specific files
+.DS_Store
+.env
+.idea/
+.vscode/
+babel.config.js
+metro.config.js
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Log files
+*.log
+
+# Expo Router configuration
+.expo-router/
+
+# Cache
+.cache/
+.expo/cache/
+
+# React Native specific files
+*.iml
+*.keystore
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.lock
+
+# Expo autogenerates .expo upon running. Exclude that too.
+.expo/
+
+# Mac and Linux specific
+*.DS_Store
+*.sass-cache
+*.log
