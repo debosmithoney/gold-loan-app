@@ -3,8 +3,10 @@
     {
       "id": 1,
       "name": "John Doe",
-      "knNumber": "KN123456",
+      "email": "john.doe@example.com",
+      "password": "password123",
       "role": "User",
+      "knNumber": "KN123456",
       "goldDepositRequests": [
         {
           "id": 1,
@@ -40,8 +42,10 @@
     {
       "id": 2,
       "name": "Jane Smith",
-      "knNumber": "KN987654",
+      "email": "jane.smith@example.com",
+      "password": "password456",
       "role": "User",
+      "knNumber": "KN987654",
       "goldDepositRequests": [
         {
           "id": 1,
@@ -67,8 +71,10 @@
     {
       "id": 3,
       "name": "Amit Patel",
-      "knNumber": "KN564738",
+      "email": "amit.patel@example.com",
+      "password": "password789",
       "role": "User",
+      "knNumber": "KN564738",
       "goldDepositRequests": [
         {
           "id": 1,
@@ -93,17 +99,39 @@
     },
     {
       "id": 4,
-      "name": "Michael Scott",
+      "name": "Ravi Kumar",
+      "email": "ravi.kumar@example.com",
+      "password": "password321",
       "role": "Employee",
-      "branch": "Scranton Branch",
-      "position": "Loan Officer"
+      "knNumber": "KN112233",
+      "goldDepositRequests": [],
+      "bankDetails": {
+        "accountHolderName": "Ravi Kumar",
+        "jointAccount": false,
+        "accountType": "Savings",
+        "accountNumber": "1122334455",
+        "ifscCode": "BANK004",
+        "bankName": "Star Finance Bank",
+        "branchName": "Chennai Branch"
+      }
     },
     {
       "id": 5,
-      "name": "Dwight Schrute",
-      "role": "Employee",
-      "branch": "Scranton Branch",
-      "position": "Assistant Manager"
+      "name": "Anita Verma",
+      "email": "anita.verma@example.com",
+      "password": "password654",
+      "role": "Government",
+      "knNumber": "KN445566",
+      "goldDepositRequests": [],
+      "bankDetails": {
+        "accountHolderName": "Anita Verma",
+        "jointAccount": false,
+        "accountType": "N/A",
+        "accountNumber": "N/A",
+        "ifscCode": "N/A",
+        "bankName": "N/A",
+        "branchName": "N/A"
+      }
     }
   ]
 }
