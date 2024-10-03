@@ -9,7 +9,6 @@ const App: React.FC = () => {
     registerForPushNotificationsAsync().then(token => console.log(token));
     const unsubscribe = listenForNotifications(notification => {
       console.log(notification);
-      // Handle the notification, e.g., update app state or show an alert
     });
 
     return () => {
