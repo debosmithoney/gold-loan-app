@@ -1,6 +1,9 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "jsx": "react-jsx",
+    "strict": true, // Optional: enables strict type-checking options
+    "esModuleInterop": true, // Optional: allows default imports from modules with no default export
+    "skipLibCheck": true // Optional: skips type checking of declaration files
   }
 }

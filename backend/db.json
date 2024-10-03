@@ -2,136 +2,77 @@
   "users": [
     {
       "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "password": "password123",
-      "role": "User",
-      "knNumber": "KN123456",
-      "goldDepositRequests": [
-        {
-          "id": 1,
-          "goldType": "24 Carat",
-          "weight": 100,
-          "jewelersName": "GoldMart",
-          "placeBought": "New Delhi",
-          "photoUrl": "https://example.com/gold1.jpg",
-          "amount": 50000,
-          "status": "accepted"
-        },
-        {
-          "id": 2,
-          "goldType": "22 Carat",
-          "weight": 50,
-          "jewelersName": "Shree Jewelers",
-          "placeBought": "Mumbai",
-          "photoUrl": "https://example.com/gold2.jpg",
-          "amount": 25000,
-          "status": "pending"
-        }
-      ],
-      "bankDetails": {
-        "accountHolderName": "John Doe",
-        "jointAccount": false,
-        "accountType": "Savings",
-        "accountNumber": "1234567890",
-        "ifscCode": "BANK001",
-        "bankName": "Star Finance Bank",
-        "branchName": "New Delhi Branch"
-      }
+      "username": "customer1",
+      "role": "CUSTOMER",
+      "kycVerified": true,
+      "password": "customer123"
     },
     {
       "id": 2,
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "password": "password456",
-      "role": "User",
-      "knNumber": "KN987654",
-      "goldDepositRequests": [
-        {
-          "id": 1,
-          "goldType": "18 Carat",
-          "weight": 75,
-          "jewelersName": "Luxury Jewels",
-          "placeBought": "Bangalore",
-          "photoUrl": "https://example.com/gold3.jpg",
-          "amount": 30000,
-          "status": "accepted"
-        }
-      ],
-      "bankDetails": {
-        "accountHolderName": "Jane Smith",
-        "jointAccount": false,
-        "accountType": "Current",
-        "accountNumber": "9876543210",
-        "ifscCode": "BANK002",
-        "bankName": "Star Finance Bank",
-        "branchName": "Bangalore Branch"
-      }
+      "username": "employee1",
+      "role": "EMPLOYEE",
+      "password": "employee123"
     },
     {
       "id": 3,
-      "name": "Amit Patel",
-      "email": "amit.patel@example.com",
-      "password": "password789",
-      "role": "User",
-      "knNumber": "KN564738",
-      "goldDepositRequests": [
-        {
-          "id": 1,
-          "goldType": "24 Carat",
-          "weight": 200,
-          "jewelersName": "Raj Jewelers",
-          "placeBought": "Ahmedabad",
-          "photoUrl": "https://example.com/gold4.jpg",
-          "amount": 100000,
-          "status": "rejected"
-        }
-      ],
-      "bankDetails": {
-        "accountHolderName": "Amit Patel",
-        "jointAccount": true,
-        "accountType": "Savings",
-        "accountNumber": "5647382910",
-        "ifscCode": "BANK003",
-        "bankName": "Star Finance Bank",
-        "branchName": "Ahmedabad Branch"
-      }
+      "username": "government1",
+      "role": "GOVERNMENT",
+      "password": "government123"
     },
     {
       "id": 4,
-      "name": "Ravi Kumar",
-      "email": "ravi.kumar@example.com",
-      "password": "password321",
-      "role": "Employee",
-      "knNumber": "KN112233",
-      "goldDepositRequests": [],
-      "bankDetails": {
-        "accountHolderName": "Ravi Kumar",
-        "jointAccount": false,
-        "accountType": "Savings",
-        "accountNumber": "1122334455",
-        "ifscCode": "BANK004",
-        "bankName": "Star Finance Bank",
-        "branchName": "Chennai Branch"
-      }
+      "username": "customer2",
+      "role": "CUSTOMER",
+      "kycVerified": false,
+      "password": "customer234"
     },
     {
       "id": 5,
-      "name": "Anita Verma",
-      "email": "anita.verma@example.com",
-      "password": "password654",
-      "role": "Government",
-      "knNumber": "KN445566",
-      "goldDepositRequests": [],
-      "bankDetails": {
-        "accountHolderName": "Anita Verma",
-        "jointAccount": false,
-        "accountType": "N/A",
-        "accountNumber": "N/A",
-        "ifscCode": "N/A",
-        "bankName": "N/A",
-        "branchName": "N/A"
-      }
+      "username": "customer3",
+      "role": "CUSTOMER",
+      "kycVerified": true,
+      "password": "customer345"
+    },
+    {
+      "id": 6,
+      "username": "customer4",
+      "role": "CUSTOMER",
+      "kycVerified": false,
+      "password": "customer456"
+    },
+    {
+      "id": 7,
+      "username": "customer5",
+      "role": "CUSTOMER",
+      "kycVerified": true,
+      "password": "customer567"
+    }
+  ],
+  "kycRequests": [
+    {
+      "id": "KYC001",
+      "userId": 1,
+      "aadhaarNumber": "1234 5678 9012",
+      "panNumber": "ABCDE1234F",
+      "status": "PENDING"
+    }
+  ],
+  "goldDepositRequests": [
+    {
+      "id": "GDR001",
+      "userId": 1,
+      "knNumber": "KN12345",
+      "goldType": "24 Carat",
+      "weight": 10,
+      "placeBought": "Mumbai",
+      "jewelerName": "ABC Jewelers",
+      "jewelerAddress": "123 Main St, Mumbai",
+      "accountHolderName": "John Doe",
+      "accountNumber": "1234567890",
+      "ifscCode": "ABCD0001234",
+      "bankName": "XYZ Bank",
+      "branchName": "Mumbai Main Branch",
+      "status": "PENDING"
     }
   ]
 }
