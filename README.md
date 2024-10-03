@@ -1,7 +1,3 @@
-Here's a shortened version of your README:
-
----
-
 # Gold Deposit Management System
 
 ## Overview
