@@ -1,51 +1,57 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "customer1",
       "role": "CUSTOMER",
       "kycVerified": true,
       "password": "customer123"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "employee1",
       "role": "EMPLOYEE",
       "password": "employee123"
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "government1",
       "role": "GOVERNMENT",
       "password": "government123"
     },
     {
-      "id": 4,
+      "id": "4",
       "username": "customer2",
       "role": "CUSTOMER",
       "kycVerified": false,
       "password": "customer234"
     },
     {
-      "id": 5,
+      "id": "5",
       "username": "customer3",
       "role": "CUSTOMER",
       "kycVerified": true,
       "password": "customer345"
     },
     {
-      "id": 6,
+      "id": "6",
       "username": "customer4",
       "role": "CUSTOMER",
       "kycVerified": false,
       "password": "customer456"
     },
     {
-      "id": 7,
+      "id": "7",
       "username": "customer5",
       "role": "CUSTOMER",
       "kycVerified": true,
       "password": "customer567"
+    },
+    {
+      "id": "02a7",
+      "username": "Vanakan",
+      "password": "gsusjsj",
+      "role": "CUSTOMER"
     }
   ],
   "kycRequests": [
@@ -72,6 +78,36 @@
       "ifscCode": "ABCD0001234",
       "bankName": "XYZ Bank",
       "branchName": "Mumbai Main Branch",
+      "status": "Approved"
+    },
+    {
+      "id": "8ae6",
+      "knNumber": "157282",
+      "goldType": "8",
+      "weight": "5",
+      "placeBought": "Gshsjeghd",
+      "jewelerName": "Hsjsjsj",
+      "jewelerAddress": "Gsjsushs",
+      "accountHolderName": "Banks",
+      "accountNumber": "876154861",
+      "ifscCode": "Bsjsjsj",
+      "bankName": "Bakshey",
+      "branchName": "Hahaha",
+      "status": "PENDING"
+    },
+    {
+      "id": "fc43",
+      "knNumber": "Heheh",
+      "goldType": "16",
+      "weight": "8",
+      "placeBought": "Bsjejs",
+      "jewelerName": "Bsnsjej",
+      "jewelerAddress": "Beje iske",
+      "accountHolderName": "Bs skals",
+      "accountNumber": "8458484",
+      "ifscCode": "Gajanan",
+      "bankName": "Gajanan",
+      "branchName": "Bsnsjsdj",
       "status": "PENDING"
     }
   ]

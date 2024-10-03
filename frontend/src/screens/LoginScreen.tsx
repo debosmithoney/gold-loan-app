@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import { login } from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from "react";
+import { View, StyleSheet, Alert, TouchableOpacity, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Input from "../components/Input";
+import Button from "../components/Button";
+import { login } from "../services/api";
+import { useAuth } from "../context/AuthContext";
+
+interface User {
+  id: number; 
+  username: string; 
+  role: "CUSTOMER" | "EMPLOYEE" | "GOVERNMENT";
+}
 
 const LoginScreen: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const { login: authLogin } = useAuth();
@@ -16,40 +22,38 @@ const LoginScreen: React.FC = () => {
   const handleLogin = async () => {
     // Basic validation
     if (!username || !password) {
-      Alert.alert('Error', 'Please enter both username and password');
+      Alert.alert("Error", "Please enter both username and password");
       return;
     }
 
     setIsLoading(true);
     try {
-      const user = await login(username, password);
+      const user = (await login(username, password)) as User;
 
-      // Check if user has a valid role
       if (!user.role) {
-        Alert.alert('Error', 'User role is invalid or not found');
+        Alert.alert("Error", "User role is invalid or not found");
         return;
       }
 
-      // Store the authenticated user in context
       authLogin(user);
 
       // Navigate based on user role
       switch (user.role) {
-        case 'CUSTOMER':
-          navigation.navigate('CustomerDashboard');
+        case "CUSTOMER":
+          navigation.navigate("CustomerDashboard");
           break;
-        case 'EMPLOYEE':
-          navigation.navigate('EmployeeDashboard');
+        case "EMPLOYEE":
+          navigation.navigate("EmployeeDashboard");
           break;
-        case 'GOVERNMENT':
-          navigation.navigate('GovernmentDashboard');
+        case "GOVERNMENT":
+          navigation.navigate("GovernmentDashboard");
           break;
         default:
-          Alert.alert('Error', 'Invalid user role');
+          Alert.alert("Error", "Invalid user role");
       }
     } catch (error) {
-      console.error(error); // Log error for debugging
-      Alert.alert('Error', 'Login failed. Please check your credentials.');
+      console.error(error); 
+      Alert.alert("Error", "Login failed. Please check your credentials.");
     } finally {
       setIsLoading(false);
     }
@@ -75,6 +79,9 @@ const LoginScreen: React.FC = () => {
         onPress={handleLogin}
         disabled={isLoading}
       />
+      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        <Text>Want to Register?</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -82,7 +89,7 @@ const LoginScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 20,
   },
 });

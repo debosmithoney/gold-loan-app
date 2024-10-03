@@ -1,9 +1,9 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface User {
-  id: number;
+  id: number; // Change from number to string
   username: string;
-  role: string;
+  role: 'CUSTOMER' | 'EMPLOYEE' | 'GOVERNMENT'; // Use specific roles for better type safety
 }
 
 interface AuthContextType {
@@ -12,9 +12,15 @@ interface AuthContextType {
   logout: () => void;
 }
 
+// Create a context for authentication
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC = ({ children }) => {
+// Define props for AuthProvider to include children
+interface AuthProviderProps {
+  children: ReactNode; // Define children prop as ReactNode
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = (userData: User) => {
@@ -27,11 +33,12 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
+      {children} 
     </AuthContext.Provider>
   );
 };
 
+// Custom hook for using auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {

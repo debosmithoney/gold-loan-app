@@ -50,5 +50,3 @@ export function listenForNotifications(handleNotification: (notification: Notifi
     Notifications.removeNotificationSubscription(responseListener);
   };
 }
-
-// Usage in App.tsx

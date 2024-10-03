@@ -2,15 +2,38 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { submitKYC } from '../../services/api'; 
+import { useAuth } from '../../context/AuthContext';
 
 const KYCVerificationScreen: React.FC = () => {
   const [aadhaarNumber, setAadhaarNumber] = useState('');
   const [panNumber, setPanNumber] = useState('');
+  const { user } = useAuth();
 
-  const handleSubmit = () => {
-    // In a real app, you would call an API to verify the KYC details
-    console.log('Submitting KYC:', { aadhaarNumber, panNumber });
-    Alert.alert('KYC Submitted', 'Your KYC details have been submitted for verification.');
+  const handleSubmit = async () => {
+    if (!aadhaarNumber || !panNumber) {
+      Alert.alert('Error', 'Please enter both Aadhaar and PAN numbers.');
+      return;
+    }
+
+    if (!user) {
+      Alert.alert('Error', 'User is not authenticated.');
+      return;
+    }
+
+    try {
+      const response = await submitKYC(user.id, aadhaarNumber, panNumber); // Using user.id from context
+      console.log('KYC Submitted:', response);
+      Alert.alert('KYC Submitted', 'Your KYC details have been submitted for verification.');
+      clearForm();
+    } catch (error) {
+      Alert.alert('Error', 'Failed to submit KYC. Please try again.');
+    }
+  };
+
+  const clearForm = () => {
+    setAadhaarNumber('');
+    setPanNumber('');
   };
 
   return (

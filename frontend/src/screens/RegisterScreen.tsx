@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { submitKYC } from '../services/api';
+import { submitKYC, registerUser } from '../services/api';
 
-// Define the validation schema using Zod
 const schema = z.object({
   username: z.string().min(1, 'Username is required'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
@@ -20,22 +19,26 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const Register: React.FC = () => {
+const RegisterScreen: React.FC = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data: FormData) => {
-    // Handle registration logic here
-    console.log(data);
+    try {
+      const registrationResponse = await registerUser(data.username, data.password, data.role);
+      console.log('Registration Response:', registrationResponse);
 
-    // If KYC details are provided, submit them
-    if (data.role === 'CUSTOMER' && data.aadhaarNumber && data.panNumber) {
-      const kycResponse = await submitKYC(1, data.aadhaarNumber, data.panNumber); // Replace 1 with actual user ID as needed
-      console.log('KYC Response:', kycResponse);
+      if (data.role === 'CUSTOMER' && data.aadhaarNumber && data.panNumber) {
+        const kycResponse = await submitKYC(registrationResponse.id, data.aadhaarNumber, data.panNumber);
+        console.log('KYC Response:', kycResponse);
+      }
+
+      Alert.alert('Success', 'Registration successful!');
+    } catch (error) {
+      console.error('Error during registration:', error);
+      Alert.alert('Error', 'Registration failed. Please try again.');
     }
-
-    // You can add your registration API call here to save the user details
   };
 
   return (
@@ -46,10 +49,11 @@ const Register: React.FC = () => {
         name="username"
         render={({ field: { onChange, onBlur, value } }) => (
           <Input
+            label="Username"
             placeholder="Username"
             onBlur={onBlur}
             onChangeText={onChange}
-            value={value}
+            value={value || ''} 
           />
         )}
       />
@@ -60,11 +64,12 @@ const Register: React.FC = () => {
         name="password"
         render={({ field: { onChange, onBlur, value } }) => (
           <Input
+            label="Password"
             placeholder="Password"
             secureTextEntry
             onBlur={onBlur}
             onChangeText={onChange}
-            value={value}
+            value={value || ''} 
           />
         )}
       />
@@ -75,9 +80,10 @@ const Register: React.FC = () => {
         name="role"
         render={({ field: { onChange, value } }) => (
           <Input
+            label="Role" 
             placeholder="Role (CUSTOMER, EMPLOYEE, GOVERNMENT)"
             onChangeText={onChange}
-            value={value}
+            value={value || ''} 
           />
         )}
       />
@@ -88,10 +94,11 @@ const Register: React.FC = () => {
         name="aadhaarNumber"
         render={({ field: { onChange, onBlur, value } }) => (
           <Input
+            label="Aadhaar Number" 
             placeholder="Aadhaar Number (optional)"
             onBlur={onBlur}
             onChangeText={onChange}
-            value={value}
+            value={value || ''} 
           />
         )}
       />
@@ -101,10 +108,11 @@ const Register: React.FC = () => {
         name="panNumber"
         render={({ field: { onChange, onBlur, value } }) => (
           <Input
+            label="PAN Number" 
             placeholder="PAN Number (optional)"
             onBlur={onBlur}
             onChangeText={onChange}
-            value={value}
+            value={value || ''} 
           />
         )}
       />
@@ -125,17 +133,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 8,
-  },
   error: {
     color: 'red',
     marginBottom: 10,
   },
 });
 
-export default Register;
+export default RegisterScreen;

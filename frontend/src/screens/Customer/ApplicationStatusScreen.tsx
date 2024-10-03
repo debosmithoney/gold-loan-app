@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { getGoldDepositRequests } from '../../services/api';
 import StatusBadge from '../../components/StatusBadge';
 
@@ -13,6 +12,8 @@ interface GoldDepositRequest {
 
 const ApplicationStatusScreen: React.FC = () => {
   const [requests, setRequests] = useState<GoldDepositRequest[]>([]);
+  const [loading, setLoading] = useState(true); // State to handle loading
+  const [error, setError] = useState<string | null>(null); // State to handle errors
 
   useEffect(() => {
     fetchRequests();
@@ -24,6 +25,9 @@ const ApplicationStatusScreen: React.FC = () => {
       setRequests(data);
     } catch (error) {
       console.error('Error fetching requests:', error);
+      setError('Failed to fetch requests. Please try again later.'); // Set error message
+    } finally {
+      setLoading(false); // Stop loading indicator
     }
   };
 
@@ -35,6 +39,23 @@ const ApplicationStatusScreen: React.FC = () => {
       <StatusBadge status={item.status} />
     </View>
   );
+
+  // Render loading or error state
+  if (loading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorMessage}>{error}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -67,6 +88,21 @@ const styles = StyleSheet.create({
   requestId: {
     fontWeight: 'bold',
     marginBottom: 5,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 

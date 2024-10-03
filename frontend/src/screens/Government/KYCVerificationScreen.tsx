@@ -1,27 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Alert } from 'react-native';
 import Button from '../../components/Button';
+import { getKYCRequests, updateKYCRequest } from '../../services/api';
 
 const GovernmentKYCVerificationScreen: React.FC = () => {
-  const [kycRequest, setKycRequest] = useState({
-    id: 'KYC001',
-    customerName: 'Jane Doe',
-    aadhaarNumber: '1234 5678 9012',
-    panNumber: 'ABCDE1234F',
-    status: 'Pending',
-  });
+  const [kycRequest, setKycRequest] = useState<any>(null); // Initially null, until data is fetched
+  const [loading, setLoading] = useState(true);
 
-  const handleVerify = () => {
-    // In a real app, you would call an API to verify the KYC details
-    setKycRequest({ ...kycRequest, status: 'Verified' });
-    Alert.alert('KYC Verified', 'The KYC details have been verified successfully.');
+  useEffect(() => {
+    const fetchKYCRequests = async () => {
+      try {
+        const requests = await getKYCRequests('Pending'); // Fetch pending requests
+        if (requests.length > 0) {
+          setKycRequest(requests[0]); // Display the first pending request
+        } else {
+          Alert.alert('No pending KYC requests.');
+        }
+      } catch (error) {
+        console.error('Error fetching KYC requests:', error);
+        Alert.alert('Error', 'Failed to fetch KYC requests.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchKYCRequests();
+  }, []);
+
+  const handleVerify = async () => {
+    try {
+      await updateKYCRequest(kycRequest.id, 'Verified');
+      setKycRequest({ ...kycRequest, status: 'Verified' });
+      Alert.alert('KYC Verified', 'The KYC details have been verified successfully.');
+    } catch (error) {
+      console.error('Error verifying KYC request:', error);
+      Alert.alert('Error', 'Failed to verify KYC request.');
+    }
   };
 
-  const handleReject = () => {
-    // In a real app, you would call an API to reject the KYC details
-    setKycRequest({ ...kycRequest, status: 'Rejected' });
-    Alert.alert('KYC Rejected', 'The KYC details have been rejected.');
+  const handleReject = async () => {
+    try {
+      await updateKYCRequest(kycRequest.id, 'Rejected');
+      setKycRequest({ ...kycRequest, status: 'Rejected' });
+      Alert.alert('KYC Rejected', 'The KYC details have been rejected.');
+    } catch (error) {
+      console.error('Error rejecting KYC request:', error);
+      Alert.alert('Error', 'Failed to reject KYC request.');
+    }
   };
+
+  if (loading || !kycRequest) {
+    return <Text>Loading KYC request...</Text>;
+  }
 
   return (
     <View style={styles.container}>

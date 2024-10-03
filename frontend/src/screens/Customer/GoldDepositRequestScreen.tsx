@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, Alert } from "react-native";
+import { ScrollView, StyleSheet, Alert } from "react-native";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { submitGoldDepositRequest } from '../../services/api' // Assuming you have an api folder for request functions
 
 const GoldDepositRequestScreen: React.FC = () => {
   const [knNumber, setKnNumber] = useState("");
@@ -16,9 +17,29 @@ const GoldDepositRequestScreen: React.FC = () => {
   const [bankName, setBankName] = useState("");
   const [branchName, setBranchName] = useState("");
 
-  const handleSubmit = () => {
-    // In a real app, you would call an API to submit the gold deposit request
-    console.log("Submitting Gold Deposit Request:", {
+  const validateForm = () => {
+    if (
+      !knNumber ||
+      !goldType ||
+      !weight ||
+      !placeBought ||
+      !jewelerName ||
+      !accountHolderName ||
+      !accountNumber ||
+      !ifscCode ||
+      !bankName ||
+      !branchName
+    ) {
+      Alert.alert("Error", "Please fill in all fields before submitting.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    const requestData = {
       knNumber,
       goldType,
       weight,
@@ -30,11 +51,33 @@ const GoldDepositRequestScreen: React.FC = () => {
       ifscCode,
       bankName,
       branchName,
-    });
-    Alert.alert(
-      "Request Submitted",
-      "Your gold deposit request has been submitted successfully."
-    );
+    };
+
+    try {
+      const response = await submitGoldDepositRequest(requestData);
+      console.log("Gold Deposit Request Submitted:", response);
+      Alert.alert(
+        "Request Submitted",
+        "Your gold deposit request has been submitted successfully."
+      );
+      clearForm();
+    } catch (error) {
+      Alert.alert("Error", "Failed to submit request. Please try again later.");
+    }
+  };
+
+  const clearForm = () => {
+    setKnNumber("");
+    setGoldType("");
+    setWeight("");
+    setPlaceBought("");
+    setJewelerName("");
+    setJewelerAddress("");
+    setAccountHolderName("");
+    setAccountNumber("");
+    setIfscCode("");
+    setBankName("");
+    setBranchName("");
   };
 
   return (
@@ -50,6 +93,7 @@ const GoldDepositRequestScreen: React.FC = () => {
         label="Weight (in grams)"
         value={weight}
         onChangeText={setWeight}
+        keyboardType="numeric"
       />
       <Input
         label="Place Bought From"
@@ -75,6 +119,7 @@ const GoldDepositRequestScreen: React.FC = () => {
         label="Account Number"
         value={accountNumber}
         onChangeText={setAccountNumber}
+        keyboardType="numeric"
       />
       <Input label="IFSC Code" value={ifscCode} onChangeText={setIfscCode} />
       <Input label="Bank Name" value={bankName} onChangeText={setBankName} />

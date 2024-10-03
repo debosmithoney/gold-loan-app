@@ -31,9 +31,18 @@ const GoldEvaluationScreen: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const updatedRequest = await updateGoldDepositRequest(requestId, 'EVALUATED');
+      // Create an object with the updated data
+      const updatedData = {
+        status: 'EVALUATED',
+        goldQuality,
+        evaluatedWeight: Number(evaluatedWeight),
+      };
+
+      // Update the request
+      await updateGoldDepositRequest(requestId, updatedData);
       Alert.alert('Success', `Request ${requestId} has been evaluated and updated.`);
-      // Clear form after successful submission
+
+      // Clear form fields
       setRequestId('');
       setGoldQuality('');
       setEvaluatedWeight('');

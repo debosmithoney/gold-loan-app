@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 
 interface GoldRate {
@@ -44,10 +44,11 @@ const GoldRatesScreen: React.FC = () => {
   if (isLoading) {
     return (
       <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
         <Text>Loading gold rates...</Text>
       </View>
     );
-  }
+}
 
   if (error) {
     return (
